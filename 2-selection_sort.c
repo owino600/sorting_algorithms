@@ -13,7 +13,7 @@ void selection_sort(int *array, size_t size)
 				swap(&array[i], &array[j]);
 			}
 		}
-		printf(" Array after swapping is: %ld", i + 1);
+		printf(" Array after swapping is:");
 		for (k = 0; k < size; k++)
 		{
 			printf("%d ", array[k]);
