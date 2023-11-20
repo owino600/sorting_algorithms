@@ -2,11 +2,9 @@
 #define SORT_H
 
 #include <stdio.h>
-<<<<<<< HEAD
+
 #include <stdlib.h>
 #include <stddef.h>
-=======
->>>>>>> 758c81193177aaf2f0aa380a666711a01a171ac7
 
 /**
  *  * struct listint_s - Doubly linked list node
