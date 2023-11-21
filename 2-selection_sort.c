@@ -2,22 +2,32 @@
 
 void selection_sort(int *array, size_t size)
 {
-	size_t i, j, k;
+	size_t min_value_index = 0;
+	size_t pass = 0, index = 0;
+	size_t passes_required = 0;
+	int temp = 0;
 
-	for (i = 0; i < size - 1; i++)
+	if (array == NULL || size < 2)
 	{
-		for (j = i + 1; j < size; j++)
+		return;
+	}
+	passes_required = size - 1;
+	for (pass = 0; pass < passes_required; pass++)
+	{
+		min_value_index = pass;
+		for (index = pass + 1; index < size; index++)
 		{
-			if (array[j] < array[i])
+			if (array[index] < array[min_value_index])
 			{
-				swap(&array[i], &array[j]);
+				min_value_index = index;
 			}
 		}
-		printf(" Array after swapping is:");
-		for (k = 0; k < size; k++)
+		temp = array[pass];
+		array[pass] = array[min_value_index];
+		array[min_value_index] = temp;
+		if (min_value_index > pass)
 		{
-			printf("%d ", array[k]);
+			print_array(array, size);
 		}
-		printf("\n");
 	}
 }
