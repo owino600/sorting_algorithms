@@ -1,46 +1,64 @@
 #include "sort.h"
-size_t lomuto_partition(int *array, size_t low, size_t high)
+
+void quick_sort(int *array, size_t size)
 {
-	int pivot;
-	size_t i, j;
-
-	pivot = array[high];
-	i = low - 1;
-
-	for (j = low; j < high; j++)
+	if (array == NULL || size < 2)
 	{
-		if (array[j] < pivot)
+		return;
+	}
+
+	sort_partition(array, size, 0, size - 1);
+}
+void sort_partition(int *array, int size, int first, int last)
+{
+	int pivot = 0;
+
+	if (first < last)
+	{
+		pivot = get_pivot_index(array, size, first, last);
+		if (pivot - first > 1)
 		{
-			i++;
-			swap(&array[i], &array[j]);
+			sort_partition(array, size, first, pivot - 1);
+		}
+		if (last - pivot > 1)
+		{
+			sort_partition(array, size, pivot + 1, last);
 		}
 	}
-	swap(&array[i + 1], &array[high]);
-	return i + 1;
 }
-
-void quick_sort_helper(int *array, size_t low, size_t high)
+void swap(int **array, int first_index, int second_index)
 {
-	size_t _index, i;
+	int temp = 0;
 
-	if (low < high)
-	{
-		_index = lomuto_partition(array, low, high);
-
-		printf("Array after swapping: ");
-		for (i = low; i <= high; i++)
-		{
-			printf("%d ", array[i]);
-		}
-		printf("\n");
-
-		quick_sort_helper(array, low, _index - 1);
-		quick_sort_helper(array, _index + 1, high);
-	}
+	temp = (*array)[first_index];
+	(*array)[first_index] = (*array)[second_index];
+	(*array)[second_index] = temp;
 }
+int get_pivot_index(int *array, size_t size, int first, int last)
+{
+	int pivot = 0;
+	int left = 0, new_pivot = 0;
 
-void quick_sort(int *array, size_t size) {
-	if (size > 0) {
-		quick_sort_helper(array, 0, size - 1);
+	pivot = last;
+	left = first;
+	new_pivot = first - 1;
+
+	for (; left < last; left++)
+	{
+		if (array[left] <= array[pivot])
+		{
+			new_pivot++;
+			if (new_pivot != left)
+			{
+				swap(&array, new_pivot, left);
+				print_array(array, size);
+			}
+		}
 	}
+	if ((new_pivot + 1) != last)
+	{
+		swap(&array, new_pivot + 1, last);
+		print_array(array, size);
+	}
+	return (new_pivot + 1);
 }
