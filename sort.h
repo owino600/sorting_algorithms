@@ -31,7 +31,6 @@ void quick_sort(int *array, size_t size);
 void print_array(const int *array, size_t size);
 void print_list(const listint_t *list);
 void sort_partition(int *array, int size, int first, int last);
-void swap(int **array, int first_index, int second_index);
 int get_pivot_index(int *array, size_t size, int first, int last);
 
 
